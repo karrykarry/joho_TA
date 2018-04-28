@@ -19,32 +19,32 @@ int main(void){
 
 	if(w_num == 0){
 
-		printf("風速を入力してください(強い:3,弱い:0):");
+		printf("風速を入力してください(強い:0,弱い:1):");
 		scanf("%d",&v_num);
 
 		if(v_num == 0) printf("開催\n");
-		else if(v_num == 3) printf("開催\n");
+		else if(v_num == 1) printf("開催\n");
 		else printf("エラー\n");
 
 	}
 
 	else if(w_num == 1){
 
-		printf("風速を入力してください(強い:3,弱い:0):");
+		printf("風速を入力してください(強い:0,弱い:1):");
 		scanf("%d",&v_num);
 
-		if(v_num == 0) printf("開催\n");
-		else if(v_num == 3) printf("延期\n");
+		if(v_num == 0) printf("延期\n");
+		else if(v_num == 1) printf("開催\n");
 		else printf("エラー\n");
 	}
 
 	else if(w_num == 2){
 
-		printf("風速を入力してください(強い:3,弱い:0):");
+		printf("風速を入力してください(強い:0,弱い:1):");
 		scanf("%d",&v_num);
 
 		if(v_num == 0) printf("延期\n");
-		else if(v_num == 3) printf("延期\n");
+		else if(v_num == 1) printf("延期\n");
 		else printf("エラー\n");
 	}
 
