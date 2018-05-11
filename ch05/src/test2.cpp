@@ -55,7 +55,7 @@ int main(void){
 	int num_2;
 	int ans;
 
-	printf("2つの数の最大公倍数を求める\n");
+	printf("2つの数の最大公約数を求める\n");
 	printf("数字1を入力せよ:");
 	scanf("%d",&num_1);
 	printf("数字2を入力せよ:");
@@ -65,7 +65,7 @@ int main(void){
 		swap(num_1,num_2);
 		ans = euclid(num_1,num_2);
 
-		printf("%dが最大公倍数\n",ans);
+		printf("%dが最大公約数\n",ans);
 
 	}
 

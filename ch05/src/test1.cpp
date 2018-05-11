@@ -1,11 +1,11 @@
 //
-//入力した数までの素数を表示
+//入力した数が素数か判定
 //
 //キーボードから入力せよ
 //
 #include<stdio.h>
 
-bool sosu_hantei(int num){
+bool prime(int num){
 
 	bool hantei = true;
 
@@ -33,7 +33,7 @@ int main(void){
 	scanf("%d",&num);
 	if(num>0){
 
-		hantei = sosu_hantei(num);
+		hantei = prime(num);
 
 		if(hantei)printf("%dは素数\n",num);
 		else printf("%dは素数ではない\n",num);
