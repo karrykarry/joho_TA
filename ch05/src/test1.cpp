@@ -9,16 +9,15 @@ bool sosu_hantei(int num){
 
 	bool hantei = true;
 
-
 	for(int i=2;i<num;i++){
 		if(num%i == 0){
-			printf("out\n");
 			hantei = false;
 			break;
 		}
 
 	}
-return hantei;
+
+	return hantei;
 
 }
 
@@ -29,12 +28,18 @@ int main(void){
 	int num;
 	bool hantei;
 
-	printf("数字を入力せよ\n");
+	printf("素数判定をしたい\n");
+	printf("数字を入力せよ:");
 	scanf("%d",&num);
+	if(num>0){
 
-	hantei = sosu_hantei(num);
+		hantei = sosu_hantei(num);
 
-	if(hantei)printf("%dは素数\n",num);
-	else printf("%dは素数ではない\n",num);
+		if(hantei)printf("%dは素数\n",num);
+		else printf("%dは素数ではない\n",num);
+	}
+
+	else printf("正の数を入力するように\n");
+
 
 }
