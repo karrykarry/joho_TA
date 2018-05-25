@@ -1,35 +1,66 @@
-//
-//”z—ñ‚ÌŠe—v‘f‚ğ}6_1‚É¦‚·7l‚ÌƒeƒXƒg‚Ì“_”‚Å‰Šú‰»‚µ‚ÄC•½‹ÏC•W€•Î·‚ğ¬”‘æ2ˆÊ‚Ü‚Å•\¦‚·‚éD
-//‚Ü‚½C‚»‚ê‚¼‚ê‚Ì•Î·’l‚ğ¬”‘æ1ˆÊ‚Ü‚Å‹‚ß‚éD
-//
 
+//
+//é…åˆ—ã®å„è¦ç´ ã‚’å›³6_1ã«ç¤ºã™7äººã®ãƒ†ã‚¹ãƒˆã®ç‚¹æ•°ã§åˆæœŸåŒ–ã—ã¦ï¼Œå¹³å‡ï¼Œæ¨™æº–åå·®ã‚’å°æ•°ç¬¬2ä½ã¾ã§è¡¨ç¤ºã™ã‚‹ï¼
+//ã¾ãŸï¼Œãã‚Œãã‚Œã®åå·®å€¤ã‚’å°æ•°ç¬¬1ä½ã¾ã§æ±‚ã‚ã‚‹ï¼
+//
 #include <stdio.h>
-#include <math.h>
 
-int main(void)
-{
-	const int N = 7;
-	int score[N] = {41, 30, 91, 85, 28, 66, 47};
+#include <math.h> 
+
+
+const int N = 7;
+
+float average(int* score){
+
 	float ave;
-	float stdev;
-	float dev;
-	
+
 	for(int i=0;i<N;i++){
 		ave += score[i];
 	}
 	ave /= N;
-	printf("•½‹ÏF%.2f\n", ave);
 	
+	return ave;
+}
+
+float stdev(int* score,float ave){
+
+	float stdev;
+
 	for(int j=0;j<N;j++){
 		stdev += (score[j] - ave) * (score[j] - ave);
 	}
 	stdev = sqrt(stdev) / N;
-	printf("•W€•Î·F%.2f\n", stdev);
-	
-	printf("•Î·’lF\n");
-	printf("¼–ì  ”’Î  HŒ³  ‹´–{  âV“¡  ‚R  ¶‹î\n");
+
+	return stdev;
+}
+
+void dev(int* score,float ave,float stdev){
+
+	float dev;
+
+	printf("åå·®å€¤\n");
+	printf("è¥¿é‡  ç™½çŸ³  ç§‹å…ƒ  æ©‹æœ¬  é½‹è—¤  é«˜å±±  ç”Ÿé§’\n");
 	for(int k=0;k<N;k++){
 		dev = (score[k] - ave) * 10 / stdev + 50;
 		printf("%.1f  ", dev);
 	}
+	printf("\n");
+
 }
+
+
+int main(void)
+{
+	int score[N] = {41, 30, 91, 85, 28, 66, 47};
+	float ave;
+	float stdev_ans;
+
+	ave = average(score);
+	printf("å¹³å‡:%.2f\n", ave);
+
+	stdev_ans = stdev(score,ave);
+	printf("æ¨™æº–åå·®ï¼š%.2f\n", stdev_ans);
+	
+	dev(score,ave,stdev_ans);
+}
+
