@@ -17,32 +17,80 @@ do
 	
 	point=0
 	kadai_all=0
+	encode_file="encode_judge.txt"
 	
 	ls $dir_name | while read filename
 do
 
 	echo $filename
+	file -i $dir_name/$filename > $encode_file
 
-	g++ -o ../exe/${filename%.cpp}.out $dir_name/$filename
+
+	cat $encode_file | while read line
+do
+	if [[ $line == *utf* ]]; then 
+		echo 'UTF8';	
+		
+		g++ -o exe/${filename%.cpp}.out $dir_name/$filename
+
+		FILE=exe/${filename%.cpp}.out
+
+		if [ -e $FILE ];then
+			echo "=============== $filename is executed ===============" 
+			./exe/${filename%.cpp}.out < /dev/stdout
+			point=$(( point + 1 ))
+			rm -f FILE
+
+		else 
+			echo -e $'\t\t\e[31mcomple error\e[0m'
+		fi
+		
+	echo "=============== Show Source File ([y] or other) ===============" 
+	read key_board < /dev/stdout
+	case "$key_board" in
+		[y]) echo "Yes"
+			# less $dir_name/$filename
+			less $dir_name/$filename
+	esac
+
+	else
+		echo 'Shift-jis';
+
+		iconv -c -f sjis -t utf8 $dir_name/$filename > $filename.utf8
+
+		sed -e 's/¥n/\\n/g' $filename.utf8 > $filename
+		mv $filename  UTF8
+		rm -f $filename.utf8
 
 
-	FILE=../exe/${filename%.cpp}.out
+		g++ -o exe/${filename%.cpp}.out UTF8/$filename
 
-	if [ -e $FILE ];then
-		echo "=============== $filename is executed ===============" 
-		./../exe/${filename%.cpp}.out < /dev/stdout
-		point=$(( point + 1 ))
 
-	else 
-		echo -e $'\t\t\e[31mcomple error\e[0m'
-	fi
+		FILE=exe/${filename%.cpp}.out
+
+		if [ -e $FILE ];then
+			echo "=============== $filename is executed ===============" 
+			./exe/${filename%.cpp}.out < /dev/stdout
+			point=$(( point + 1 ))
+			rm -f FILE
+
+		else 
+			echo -e $'\t\t\e[31mcomple error\e[0m'
+		fi
 
 	echo "=============== Show Source File ([y] or other) ===============" 
 	read key_board < /dev/stdout
 	case "$key_board" in
 		[y]) echo "Yes"
-			less $dir_name/$filename
+			# less $dir_name/$filename
+			less UTF8/$filename
 	esac
+	rm -f UTF8/$filename		
+	
+	fi
+
+done
+
 	echo -e "\n"
 	echo "=============== $filename finish ===============" 
 	echo -e "\n"
@@ -50,6 +98,8 @@ do
 
 	echo "point=$point/$kadai_all"
 
+	rm -f $encode_file
+	
 done
 
 
