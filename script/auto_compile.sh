@@ -1,6 +1,9 @@
 #!/bin/bash
-# ディレクトリ名(chxx)を引数にとると自動コンパイル
+# 何回目かを引数にとると自動コンパイル($ ./auto_compile.sh 01)
 # 同じディレクトリ下で実行する
+# 同じディレクトリ下に"exe"と"UTF8"のフォルダを準備
+# Shift-jisとUTF8に対応しているはず
+
 
 if [ $# != 1 ]; then
 	echo "set task number"
@@ -49,8 +52,8 @@ do
 	read key_board < /dev/stdout
 	case "$key_board" in
 		[y]) echo "Yes"
-			# less $dir_name/$filename
 			less $dir_name/$filename
+			# ファイルを開いたら"q"で閉じる
 	esac
 
 	else
@@ -82,7 +85,6 @@ do
 	read key_board < /dev/stdout
 	case "$key_board" in
 		[y]) echo "Yes"
-			# less $dir_name/$filename
 			less UTF8/$filename
 	esac
 	rm -f UTF8/$filename		
